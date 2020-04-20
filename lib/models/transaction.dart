@@ -1,4 +1,5 @@
 import 'package:bytebank/models/contact.dart';
+import 'package:sqflite/sqlite_api.dart';
 
 class Transaction {
   final double value;
@@ -9,9 +10,18 @@ class Transaction {
     this.contact,
   );
 
+  Transaction.fromJson(Map<String, dynamic> json)
+      : value = json['value'],
+        contact = Contact.fromJson(json['contact']);
+
   @override
   String toString() {
     return 'Transaction{value: $value, contact: $contact}';
   }
 
+  Map<String, dynamic> toJson() =>
+    {
+      'value': value,
+      'contact': contact.toJson(),
+    };
 }
